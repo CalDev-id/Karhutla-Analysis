@@ -2,15 +2,13 @@ import asyncio
 from datetime import date
 from typing import Any
 
-from app.database.mysql.connection import connection
-from app.database.mysql.loaders import save_region_data
+from app.database.postgres.connection import connection
+from app.database.postgres.loaders import save_region_data
 from app.services.air_quality.service import get_air_quality
 from app.services.fire.service import get_hotspots
 from app.services.regions.service import get_regencies, get_region
 from app.services.weather.historical import get_history
 from app.services.weather.forecast import get_forecast
-
-DATABASE = "enviromental_conditions"
 
 
 async def load_region_data(region_id: str, start_date: date, end_date: date, days: int) -> dict[str, int]:
@@ -24,20 +22,13 @@ async def load_region_data(region_id: str, start_date: date, end_date: date, day
         get_air_quality(region, days), get_forecast(region),
     )
     with connection() as database_connection:
-        with database_connection.cursor() as cursor:
-            cursor.execute(f"USE `{DATABASE}`")
         return save_region_data(database_connection, province, region, weather, hotspots, air_quality, forecast)
 
 
 async def load_province_data(province_id: str, start_date: date, end_date: date, days: int) -> dict[str, Any]:
-    regencies = (await get_regencies(province_id))["data"]
     data = []
-    for regency in regencies:
+    for regency in (await get_regencies(province_id))["data"]:
         loaded = await load_region_data(regency["id"], start_date, end_date, days)
         data.append({"region_id": regency["id"], "region_name": regency["name"], "loaded": loaded})
     fields = ("weather", "hotspots", "air_quality", "forecast")
-    return {
-        "total_regencies": len(data),
-        "totals": {field: sum(item["loaded"][field] for item in data) for field in fields},
-        "data": data,
-    }
+    return {"total_regencies": len(data), "totals": {field: sum(item["loaded"][field] for item in data) for field in fields}, "data": data}

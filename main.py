@@ -3,7 +3,7 @@ from typing import Union
 from fastapi import FastAPI
 
 from app.api.routes.air_quality import router as air_quality_router
-from app.api.routes.etl import router as etl_router
+from app.api.routes.etl_mysql import router as etl_mysql_router
 from app.api.routes.etl_postgres import router as etl_postgres_router
 from app.api.routes.fire import router as fire_router
 from app.api.routes.provinces import router as provinces_router
@@ -12,7 +12,7 @@ from app.api.routes.weather import router as weather_router
 
 app = FastAPI()
 app.include_router(air_quality_router)
-app.include_router(etl_router)
+app.include_router(etl_mysql_router)
 app.include_router(etl_postgres_router)
 app.include_router(fire_router)
 app.include_router(provinces_router)

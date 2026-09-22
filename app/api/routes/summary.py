@@ -2,7 +2,7 @@ from typing import Any
 
 from fastapi import APIRouter, HTTPException, Query
 
-from app.services.fire.hotspots import FIRMSConfigurationError, FIRMSError
+from app.services.fire.service import FIRMSConfigurationError, FIRMSError
 from app.services.regions.service import EmsifaError, RegionNotFoundError
 from app.services.summary.service import get_regional_summary
 from app.services.weather.historical import VisualCrossingConfigurationError, VisualCrossingError

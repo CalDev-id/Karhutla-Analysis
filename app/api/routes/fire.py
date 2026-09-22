@@ -2,7 +2,7 @@ from typing import Any, Optional
 
 from fastapi import APIRouter, HTTPException, Query
 
-from app.services.fire.hotspots import FIRMSConfigurationError, FIRMSError, get_hotspots
+from app.services.fire.service import FIRMSConfigurationError, FIRMSError, get_hotspots
 from app.services.regions.service import EmsifaError, RegionNotFoundError, find_province, get_region
 
 router = APIRouter(prefix="/api/v1/fire", tags=["fire"])

@@ -1,10 +1,10 @@
-import os
 from contextlib import contextmanager
 from time import sleep
 from typing import Generator
 
 import pymysql
-from dotenv import load_dotenv
+
+from app.config import environment
 
 
 class MySQLConfigurationError(Exception):
@@ -16,11 +16,10 @@ class MySQLConnectionError(Exception):
 
 
 def _config() -> dict[str, object]:
-    load_dotenv()
-    host = os.getenv("MYSQL_HOST")
-    port = os.getenv("MYSQL_PORT")
-    user = os.getenv("MYSQL_USER")
-    password = os.getenv("MYSQL_PASSWORD")
+    host = environment("MYSQL_HOST")
+    port = environment("MYSQL_PORT")
+    user = environment("MYSQL_USER")
+    password = environment("MYSQL_PASSWORD")
     if not all((host, port, user, password)):
         raise MySQLConfigurationError
     try:

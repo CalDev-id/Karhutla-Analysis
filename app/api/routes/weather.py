@@ -3,7 +3,6 @@ from typing import Any
 
 from fastapi import APIRouter, HTTPException, Query
 
-from app.services.weather.forecast import BMKGError, get_forecast
 from app.services.weather.historical import (
     VisualCrossingConfigurationError,
     VisualCrossingError,
@@ -11,17 +10,6 @@ from app.services.weather.historical import (
 )
 
 router = APIRouter(prefix="/api/v1", tags=["weather"])
-
-ADM4_PATTERN = r"^\d{2}\.\d{2}\.\d{2}\.\d{4}$"
-
-
-@router.get("/weather/forecast")
-async def weather(adm4: str = Query(..., pattern=ADM4_PATTERN, description="Kode wilayah administrasi tingkat IV")) -> dict[str, Any]:
-    try:
-        return await get_forecast(adm4)
-    except BMKGError as exc:
-        raise HTTPException(status_code=502, detail="BMKG tidak menyediakan prakiraan yang dapat digunakan.") from exc
-
 
 @router.get("/weather/history")
 async def weather_history(

@@ -1,12 +1,11 @@
-import os
 from asyncio import sleep
 from datetime import date
 from typing import Any, Optional
 from urllib.parse import quote
 
-from dotenv import load_dotenv
 import httpx
 
+from app.config import environment
 from app.services.weather.transform import clean_weather_days
 
 TIMELINE_URL = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline"
@@ -22,8 +21,7 @@ class VisualCrossingConfigurationError(Exception):
 
 
 def _api_key() -> str:
-    load_dotenv()
-    api_key = os.getenv("VISUAL_CROSSING_API_KEY")
+    api_key = environment("VISUAL_CROSSING_API_KEY")
     if not api_key:
         raise VisualCrossingConfigurationError
     return api_key

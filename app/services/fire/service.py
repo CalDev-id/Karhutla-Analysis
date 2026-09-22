@@ -1,11 +1,10 @@
 import csv
-import os
 from io import StringIO
 from typing import Any
 
 import httpx
-from dotenv import load_dotenv
 
+from app.config import environment
 from app.services.fire.transform import bounds, clean_hotspots
 from app.services.regions.service import EmsifaError, get_region_paths
 
@@ -23,8 +22,7 @@ class FIRMSError(Exception):
 
 
 def _map_key() -> str:
-    load_dotenv()
-    map_key = os.getenv("MAP_KEY")
+    map_key = environment("MAP_KEY")
     if not map_key:
         raise FIRMSConfigurationError
     return map_key

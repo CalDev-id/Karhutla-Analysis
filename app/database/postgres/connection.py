@@ -1,4 +1,3 @@
-import os
 from contextlib import contextmanager
 from threading import Lock
 from time import sleep
@@ -6,7 +5,8 @@ from typing import Generator, Optional
 
 import psycopg2
 from psycopg2.pool import ThreadedConnectionPool
-from dotenv import load_dotenv
+
+from app.config import environment
 
 
 class PostgreSQLConfigurationError(Exception):
@@ -22,11 +22,10 @@ _pool_lock = Lock()
 
 
 def _config() -> dict:
-    load_dotenv()
-    host = os.getenv("POSTGRESQL_HOST")
-    port = os.getenv("POSTGRESQL_PORT")
-    user = os.getenv("POSTGRESQL_USER")
-    password = os.getenv("POSTGRESQL_PASSWORD")
+    host = environment("POSTGRESQL_HOST")
+    port = environment("POSTGRESQL_PORT")
+    user = environment("POSTGRESQL_USER")
+    password = environment("POSTGRESQL_PASSWORD")
     if not all((host, port, user, password)):
         raise PostgreSQLConfigurationError
     try:

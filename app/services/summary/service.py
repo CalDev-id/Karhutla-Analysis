@@ -2,7 +2,7 @@ from asyncio import gather
 from datetime import date, timedelta
 from typing import Any
 
-from app.services.fire.hotspots import get_hotspots
+from app.services.fire.service import get_hotspots
 from app.services.fire.transform import summarize_hotspots
 from app.services.regions.service import EmsifaError, get_region
 from app.services.weather.historical import get_history

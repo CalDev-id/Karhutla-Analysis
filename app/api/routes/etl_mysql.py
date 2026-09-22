@@ -9,12 +9,12 @@ from fastapi import APIRouter, HTTPException, Path, Query
 from app.database.mysql.connection import MySQLConfigurationError, MySQLConnectionError
 from app.pipelines.mysql.load import load_province_data, load_region_data
 from app.services.air_quality.service import OpenMeteoError
-from app.services.fire.hotspots import FIRMSConfigurationError, FIRMSError
+from app.services.fire.service import FIRMSConfigurationError, FIRMSError
 from app.services.regions.service import EmsifaError, RegionNotFoundError
 from app.services.weather.historical import VisualCrossingConfigurationError, VisualCrossingError
-from app.services.weather.regional_forecast import OpenMeteoForecastError
+from app.services.weather.forecast import OpenMeteoForecastError
 
-router = APIRouter(prefix="/api/v1/etl", tags=["etl"])
+router = APIRouter(prefix="/api/v1/etl/mysql", tags=["etl-mysql"])
 logger = logging.getLogger(__name__)
 
 
