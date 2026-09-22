@@ -28,6 +28,62 @@ def _upsert(connection: Any, sql: str, rows: Iterable[tuple[Any, ...]]) -> int:
     return len(records)
 
 
+def create_etl_run(
+    connection: Any,
+    pipeline_name: str,
+    dag_run_id: str,
+    task_id: str,
+    province_id: str,
+    started_at: datetime,
+) -> int:
+    with connection.cursor() as cursor:
+        cursor.execute(
+            """
+            INSERT INTO public.tb_r_etl_run
+                (pipeline_name, dag_run_id, task_id, province_id, started_at, status)
+            VALUES (%s, %s, %s, %s, %s, 'running')
+            RETURNING etl_run_id
+            """,
+            (pipeline_name, dag_run_id, task_id, int(province_id), started_at),
+        )
+        return cursor.fetchone()[0]
+
+
+def finish_etl_run(
+    connection: Any,
+    etl_run_id: int,
+    status: str,
+    finished_at: datetime,
+    counts: Optional[dict[str, int]] = None,
+    error_message: Optional[str] = None,
+) -> None:
+    counts = counts or {}
+    with connection.cursor() as cursor:
+        cursor.execute(
+            """
+            UPDATE public.tb_r_etl_run
+            SET finished_at = %s,
+                status = %s,
+                weather_count = %s,
+                hotspot_count = %s,
+                air_quality_count = %s,
+                forecast_count = %s,
+                error_message = %s
+            WHERE etl_run_id = %s
+            """,
+            (
+                finished_at,
+                status,
+                counts.get("weather", 0),
+                counts.get("hotspots", 0),
+                counts.get("air_quality", 0),
+                counts.get("forecast", 0),
+                error_message,
+                etl_run_id,
+            ),
+        )
+
+
 def save_region_data(connection: Any, province: dict[str, Any], region: dict[str, Any], weather: dict[str, Any], hotspots: dict[str, Any], air_quality: dict[str, Any], forecast: dict[str, Any]) -> dict[str, int]:
     region_id = region["id"]
     _upsert(connection, """INSERT INTO public.tb_m_province (province_id,province_name,population,total_area_km2,latitude,longitude,timezone) VALUES (%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (province_id) DO UPDATE SET province_name=EXCLUDED.province_name,population=EXCLUDED.population,total_area_km2=EXCLUDED.total_area_km2,latitude=EXCLUDED.latitude,longitude=EXCLUDED.longitude,timezone=EXCLUDED.timezone""", [(int(province["id"]),province["name"],province["population"],province["total_area_km2"],province["latitude"],province["longitude"],province["timezone"])])
