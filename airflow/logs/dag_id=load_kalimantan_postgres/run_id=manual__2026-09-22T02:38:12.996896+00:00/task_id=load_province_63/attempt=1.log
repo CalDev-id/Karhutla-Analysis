@@ -1,0 +1,198 @@
+[2026-09-22T02:40:04.809+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2026-09-22T02:40:04.820+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: load_kalimantan_postgres.load_province_63 manual__2026-09-22T02:38:12.996896+00:00 [queued]>
+[2026-09-22T02:40:04.823+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: load_kalimantan_postgres.load_province_63 manual__2026-09-22T02:38:12.996896+00:00 [queued]>
+[2026-09-22T02:40:04.824+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 3
+[2026-09-22T02:40:04.828+0000] {taskinstance.py:2890} INFO - Executing <Task(_PythonDecoratedOperator): load_province_63> on 2026-09-22 02:38:12.996896+00:00
+[2026-09-22T02:40:04.830+0000] {standard_task_runner.py:72} INFO - Started process 236 to run task
+[2026-09-22T02:40:04.832+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'load_kalimantan_postgres', 'load_province_63', 'manual__2026-09-22T02:38:12.996896+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/load_kalimantan_postgres.py', '--cfg-path', '/tmp/tmpg2xvzo67']
+[2026-09-22T02:40:04.834+0000] {standard_task_runner.py:105} INFO - Job 4: Subtask load_province_63
+[2026-09-22T02:40:04.869+0000] {task_command.py:467} INFO - Running <TaskInstance: load_kalimantan_postgres.load_province_63 manual__2026-09-22T02:38:12.996896+00:00 [running]> on host 339bfe956b50
+[2026-09-22T02:40:04.909+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='load_kalimantan_postgres' AIRFLOW_CTX_TASK_ID='load_province_63' AIRFLOW_CTX_EXECUTION_DATE='2026-09-22T02:38:12.996896+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-09-22T02:38:12.996896+00:00'
+[2026-09-22T02:40:04.910+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2026-09-22T02:40:05.212+0000] {_client.py:1740} INFO - HTTP Request: GET https://www.emsifa.com/api-wilayah-indonesia/v2/provinces.json "HTTP/1.1 200 OK"
+[2026-09-22T02:40:05.743+0000] {_client.py:1740} INFO - HTTP Request: GET https://www.emsifa.com/api-wilayah-indonesia/v2/regencies/63.json "HTTP/1.1 200 OK"
+[2026-09-22T02:40:10.839+0000] {_client.py:1740} INFO - HTTP Request: GET https://www.emsifa.com/api-wilayah-indonesia/v2/regencies/63.01.json "HTTP/1.1 200 OK"
+[2026-09-22T02:40:11.305+0000] {_client.py:1740} INFO - HTTP Request: GET https://www.emsifa.com/api-wilayah-indonesia/v2/provinces/63.json "HTTP/1.1 200 OK"
+[2026-09-22T02:40:12.147+0000] {_client.py:1740} INFO - HTTP Request: GET https://www.emsifa.com/api-wilayah-indonesia/v2/paths/63.01.json "HTTP/1.1 200 OK"
+[2026-09-22T02:40:12.484+0000] {_client.py:1740} INFO - HTTP Request: GET https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/-3.799466847049419,114.78255114131447/2026-09-21/2026-09-21?unitGroup=metric&include=days&elements=datetime%2Ctemp%2Chumidity%2Cprecip%2Cwindspeed%2Cwinddir%2Cconditions&contentType=json&key=4YQR6MUMC3B7XPBT8GSBEG6XP "HTTP/1.1 200 "
+[2026-09-22T02:40:12.679+0000] {_client.py:1740} INFO - HTTP Request: GET https://api.open-meteo.com/v1/forecast?latitude=-3.799466847049419&longitude=114.78255114131447&daily=weather_code%2Ctemperature_2m_min%2Ctemperature_2m_max%2Ctemperature_2m_mean%2Crelative_humidity_2m_mean%2Cprecipitation_sum%2Cprecipitation_probability_max%2Cwind_speed_10m_max%2Cwind_direction_10m_dominant%2Cuv_index_max&forecast_days=3&timezone=auto "HTTP/1.1 200 OK"
+[2026-09-22T02:40:12.682+0000] {_client.py:1740} INFO - HTTP Request: GET https://air-quality-api.open-meteo.com/v1/air-quality?latitude=-3.799466847049419&longitude=114.78255114131447&hourly=us_aqi%2Cpm2_5%2Cpm10%2Cnitrogen_dioxide%2Ccarbon_monoxide%2Cdust%2Caerosol_optical_depth%2Cuv_index&past_days=1&forecast_days=1&timezone=auto "HTTP/1.1 200 OK"
+[2026-09-22T02:40:13.822+0000] {_client.py:1740} INFO - HTTP Request: GET https://firms.modaps.eosdis.nasa.gov/api/area/csv/a00e0fd453cf11b44d6fe4f23d97f671/VIIRS_SNPP_NRT/114.512779,-4.178217,115.380913,-3.50664/2 "HTTP/1.1 200 OK"
+[2026-09-22T02:40:14.869+0000] {_client.py:1740} INFO - HTTP Request: GET https://www.emsifa.com/api-wilayah-indonesia/v2/regencies/63.02.json "HTTP/1.1 200 OK"
+[2026-09-22T02:40:15.411+0000] {_client.py:1740} INFO - HTTP Request: GET https://www.emsifa.com/api-wilayah-indonesia/v2/paths/63.02.json "HTTP/1.1 200 OK"
+[2026-09-22T02:40:15.743+0000] {_client.py:1740} INFO - HTTP Request: GET https://api.open-meteo.com/v1/forecast?latitude=-3.2362388666435793&longitude=116.22797534143119&daily=weather_code%2Ctemperature_2m_min%2Ctemperature_2m_max%2Ctemperature_2m_mean%2Crelative_humidity_2m_mean%2Cprecipitation_sum%2Cprecipitation_probability_max%2Cwind_speed_10m_max%2Cwind_direction_10m_dominant%2Cuv_index_max&forecast_days=3&timezone=auto "HTTP/1.1 200 OK"
+[2026-09-22T02:40:15.767+0000] {_client.py:1740} INFO - HTTP Request: GET https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/-3.2362388666435793,116.22797534143119/2026-09-21/2026-09-21?unitGroup=metric&include=days&elements=datetime%2Ctemp%2Chumidity%2Cprecip%2Cwindspeed%2Cwinddir%2Cconditions&contentType=json&key=4YQR6MUMC3B7XPBT8GSBEG6XP "HTTP/1.1 200 "
+[2026-09-22T02:40:15.822+0000] {_client.py:1740} INFO - HTTP Request: GET https://air-quality-api.open-meteo.com/v1/air-quality?latitude=-3.2362388666435793&longitude=116.22797534143119&hourly=us_aqi%2Cpm2_5%2Cpm10%2Cnitrogen_dioxide%2Ccarbon_monoxide%2Cdust%2Caerosol_optical_depth%2Cuv_index&past_days=1&forecast_days=1&timezone=auto "HTTP/1.1 200 OK"
+[2026-09-22T02:40:17.008+0000] {_client.py:1740} INFO - HTTP Request: GET https://firms.modaps.eosdis.nasa.gov/api/area/csv/a00e0fd453cf11b44d6fe4f23d97f671/VIIRS_SNPP_NRT/115.571609,-5.102222,117.076385,-2.292349/2 "HTTP/1.1 200 OK"
+[2026-09-22T02:40:17.901+0000] {_client.py:1740} INFO - HTTP Request: GET https://www.emsifa.com/api-wilayah-indonesia/v2/regencies/63.03.json "HTTP/1.1 200 OK"
+[2026-09-22T02:40:18.444+0000] {_client.py:1740} INFO - HTTP Request: GET https://www.emsifa.com/api-wilayah-indonesia/v2/paths/63.03.json "HTTP/1.1 200 OK"
+[2026-09-22T02:40:18.833+0000] {_client.py:1740} INFO - HTTP Request: GET https://air-quality-api.open-meteo.com/v1/air-quality?latitude=-3.408734828681626&longitude=114.84815554140891&hourly=us_aqi%2Cpm2_5%2Cpm10%2Cnitrogen_dioxide%2Ccarbon_monoxide%2Cdust%2Caerosol_optical_depth%2Cuv_index&past_days=1&forecast_days=1&timezone=auto "HTTP/1.1 200 OK"
+[2026-09-22T02:40:18.840+0000] {_client.py:1740} INFO - HTTP Request: GET https://api.open-meteo.com/v1/forecast?latitude=-3.408734828681626&longitude=114.84815554140891&daily=weather_code%2Ctemperature_2m_min%2Ctemperature_2m_max%2Ctemperature_2m_mean%2Crelative_humidity_2m_mean%2Cprecipitation_sum%2Cprecipitation_probability_max%2Cwind_speed_10m_max%2Cwind_direction_10m_dominant%2Cuv_index_max&forecast_days=3&timezone=auto "HTTP/1.1 200 OK"
+[2026-09-22T02:40:18.843+0000] {_client.py:1740} INFO - HTTP Request: GET https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/-3.408734828681626,114.84815554140891/2026-09-21/2026-09-21?unitGroup=metric&include=days&elements=datetime%2Ctemp%2Chumidity%2Cprecip%2Cwindspeed%2Cwinddir%2Cconditions&contentType=json&key=4YQR6MUMC3B7XPBT8GSBEG6XP "HTTP/1.1 200 "
+[2026-09-22T02:40:20.396+0000] {_client.py:1740} INFO - HTTP Request: GET https://firms.modaps.eosdis.nasa.gov/api/area/csv/a00e0fd453cf11b44d6fe4f23d97f671/VIIRS_SNPP_NRT/114.501358,-3.735889,115.609871,-2.82478/2 "HTTP/1.1 200 OK"
+[2026-09-22T02:40:21.647+0000] {_client.py:1740} INFO - HTTP Request: GET https://www.emsifa.com/api-wilayah-indonesia/v2/regencies/63.04.json "HTTP/1.1 200 OK"
+[2026-09-22T02:40:22.203+0000] {_client.py:1740} INFO - HTTP Request: GET https://www.emsifa.com/api-wilayah-indonesia/v2/paths/63.04.json "HTTP/1.1 200 OK"
+[2026-09-22T02:40:22.880+0000] {_client.py:1740} INFO - HTTP Request: GET https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/-2.9783388223443703,114.76579532814996/2026-09-21/2026-09-21?unitGroup=metric&include=days&elements=datetime%2Ctemp%2Chumidity%2Cprecip%2Cwindspeed%2Cwinddir%2Cconditions&contentType=json&key=4YQR6MUMC3B7XPBT8GSBEG6XP "HTTP/1.1 200 "
+[2026-09-22T02:40:23.941+0000] {_client.py:1740} INFO - HTTP Request: GET https://api.open-meteo.com/v1/forecast?latitude=-2.9783388223443703&longitude=114.76579532814996&daily=weather_code%2Ctemperature_2m_min%2Ctemperature_2m_max%2Ctemperature_2m_mean%2Crelative_humidity_2m_mean%2Cprecipitation_sum%2Cprecipitation_probability_max%2Cwind_speed_10m_max%2Cwind_direction_10m_dominant%2Cuv_index_max&forecast_days=3&timezone=auto "HTTP/1.1 200 OK"
+[2026-09-22T02:40:24.151+0000] {_client.py:1740} INFO - HTTP Request: GET https://air-quality-api.open-meteo.com/v1/air-quality?latitude=-2.9783388223443703&longitude=114.76579532814996&hourly=us_aqi%2Cpm2_5%2Cpm10%2Cnitrogen_dioxide%2Ccarbon_monoxide%2Cdust%2Caerosol_optical_depth%2Cuv_index&past_days=1&forecast_days=1&timezone=auto "HTTP/1.1 200 OK"
+[2026-09-22T02:40:29.338+0000] {_client.py:1740} INFO - HTTP Request: GET https://firms.modaps.eosdis.nasa.gov/api/area/csv/a00e0fd453cf11b44d6fe4f23d97f671/VIIRS_SNPP_NRT/114.351532,-3.503557,114.866737,-2.521539/2 "HTTP/1.1 200 OK"
+[2026-09-22T02:40:30.212+0000] {_client.py:1740} INFO - HTTP Request: GET https://www.emsifa.com/api-wilayah-indonesia/v2/regencies/63.05.json "HTTP/1.1 200 OK"
+[2026-09-22T02:40:30.719+0000] {_client.py:1740} INFO - HTTP Request: GET https://www.emsifa.com/api-wilayah-indonesia/v2/paths/63.05.json "HTTP/1.1 200 OK"
+[2026-09-22T02:40:31.097+0000] {_client.py:1740} INFO - HTTP Request: GET https://api.open-meteo.com/v1/forecast?latitude=-2.932105977155375&longitude=115.16329842419783&daily=weather_code%2Ctemperature_2m_min%2Ctemperature_2m_max%2Ctemperature_2m_mean%2Crelative_humidity_2m_mean%2Cprecipitation_sum%2Cprecipitation_probability_max%2Cwind_speed_10m_max%2Cwind_direction_10m_dominant%2Cuv_index_max&forecast_days=3&timezone=auto "HTTP/1.1 200 OK"
+[2026-09-22T02:40:31.110+0000] {_client.py:1740} INFO - HTTP Request: GET https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/-2.932105977155375,115.16329842419783/2026-09-21/2026-09-21?unitGroup=metric&include=days&elements=datetime%2Ctemp%2Chumidity%2Cprecip%2Cwindspeed%2Cwinddir%2Cconditions&contentType=json&key=4YQR6MUMC3B7XPBT8GSBEG6XP "HTTP/1.1 200 "
+[2026-09-22T02:40:31.121+0000] {_client.py:1740} INFO - HTTP Request: GET https://air-quality-api.open-meteo.com/v1/air-quality?latitude=-2.932105977155375&longitude=115.16329842419783&hourly=us_aqi%2Cpm2_5%2Cpm10%2Cnitrogen_dioxide%2Ccarbon_monoxide%2Cdust%2Caerosol_optical_depth%2Cuv_index&past_days=1&forecast_days=1&timezone=auto "HTTP/1.1 200 OK"
+[2026-09-22T02:40:32.244+0000] {_client.py:1740} INFO - HTTP Request: GET https://firms.modaps.eosdis.nasa.gov/api/area/csv/a00e0fd453cf11b44d6fe4f23d97f671/VIIRS_SNPP_NRT/114.795433,-3.176959,115.53125,-2.524119/2 "HTTP/1.1 200 OK"
+[2026-09-22T02:40:38.557+0000] {taskinstance.py:3313} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 768, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 734, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/decorators/base.py", line 266, in execute
+    return_value = super().execute(context)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/load_kalimantan_postgres.py", line 34, in load_province
+    loaded = asyncio.run(load_province_data(province_id, end_date, end_date, days=2))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/opt/airflow/project/app/pipelines/postgres/load.py", line 31, in load_province_data
+    loaded = await load_region_data(regency["id"], start_date, end_date, days)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/project/app/pipelines/postgres/load.py", line 25, in load_region_data
+    return save_region_data(database_connection, province, region, weather, hotspots, air_quality, forecast)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/project/app/database/postgres/loaders.py", line 33, in save_region_data
+    _upsert(connection, """INSERT INTO public.tb_m_province (province_id,province_name,population,total_area_km2,latitude,longitude,timezone) VALUES (%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (province_id) DO UPDATE SET province_name=EXCLUDED.province_name,population=EXCLUDED.population,total_area_km2=EXCLUDED.total_area_km2,latitude=EXCLUDED.latitude,longitude=EXCLUDED.longitude,timezone=EXCLUDED.timezone""", [(int(province["id"]),province["name"],province["population"],province["total_area_km2"],province["latitude"],province["longitude"],province["timezone"])])
+  File "/opt/airflow/project/app/database/postgres/loaders.py", line 27, in _upsert
+    execute_batch(cursor, sql, records, page_size=1_000)
+  File "/home/airflow/.local/lib/python3.11/site-packages/psycopg2/extras.py", line 1216, in execute_batch
+    cur.execute(b";".join(sqls))
+psycopg2.OperationalError: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+[2026-09-22T02:40:38.588+0000] {taskinstance.py:1226} INFO - Marking task as UP_FOR_RETRY. dag_id=load_kalimantan_postgres, task_id=load_province_63, run_id=manual__2026-09-22T02:38:12.996896+00:00, execution_date=20260922T023812, start_date=20260922T024004, end_date=20260922T024038
+[2026-09-22T02:40:38.615+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2026-09-22T02:40:38.615+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 4 for task load_province_63 (server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+; 236)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 3006, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 274, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 3161, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 3185, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 768, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 734, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/decorators/base.py", line 266, in execute
+    return_value = super().execute(context)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/load_kalimantan_postgres.py", line 34, in load_province
+    loaded = asyncio.run(load_province_data(province_id, end_date, end_date, days=2))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/opt/airflow/project/app/pipelines/postgres/load.py", line 31, in load_province_data
+    loaded = await load_region_data(regency["id"], start_date, end_date, days)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/project/app/pipelines/postgres/load.py", line 25, in load_region_data
+    return save_region_data(database_connection, province, region, weather, hotspots, air_quality, forecast)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/project/app/database/postgres/loaders.py", line 33, in save_region_data
+    _upsert(connection, """INSERT INTO public.tb_m_province (province_id,province_name,population,total_area_km2,latitude,longitude,timezone) VALUES (%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (province_id) DO UPDATE SET province_name=EXCLUDED.province_name,population=EXCLUDED.population,total_area_km2=EXCLUDED.total_area_km2,latitude=EXCLUDED.latitude,longitude=EXCLUDED.longitude,timezone=EXCLUDED.timezone""", [(int(province["id"]),province["name"],province["population"],province["total_area_km2"],province["latitude"],province["longitude"],province["timezone"])])
+  File "/opt/airflow/project/app/database/postgres/loaders.py", line 27, in _upsert
+    execute_batch(cursor, sql, records, page_size=1_000)
+  File "/home/airflow/.local/lib/python3.11/site-packages/psycopg2/extras.py", line 1216, in execute_batch
+    cur.execute(b";".join(sqls))
+psycopg2.OperationalError: server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+[2026-09-22T02:40:38.625+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2026-09-22T02:40:38.639+0000] {taskinstance.py:3901} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-09-22T02:40:38.640+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
