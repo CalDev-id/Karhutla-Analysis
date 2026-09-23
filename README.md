@@ -44,6 +44,12 @@ Catat status run ke tb_r_etl_run
 
 ## API ETL
 
+### Terintegrasi
+
+| Method | Endpoint | Fungsi |
+| --- | --- | --- |
+| POST | `/api/v1/etl/provinces/{province_id}?days=1` | Simpan master wilayah ke MySQL `region` dan environmental conditions ke PostgreSQL `environment_conditions` |
+
 ### PostgreSQL
 
 | Method | Endpoint | Fungsi |
@@ -65,6 +71,7 @@ Parameter `days` menerima nilai `1–5`. Forecast tetap otomatis mengambil 3 har
 | Method | Endpoint | Fungsi |
 | --- | --- | --- |
 | GET | `/api/v1/overview/{region_id}?days=5` | Menampilkan weather historical dan ringkasan hotspot dari PostgreSQL |
+| GET | `/api/v1/overview/regions/{region_id}?days=1` | Overview region dari MySQL `region` dan data weather/hotspot dari PostgreSQL `environment_conditions` |
 
 Contoh:
 
