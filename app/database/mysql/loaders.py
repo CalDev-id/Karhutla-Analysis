@@ -89,6 +89,83 @@ def finish_etl_run(
         )
 
 
+def save_region_master_data(
+    connection: Any, province: dict[str, Any], regencies: Iterable[dict[str, Any]]
+) -> dict[str, int]:
+    """Upsert master province and regency data into the MySQL ``region`` database.
+
+    ``tb_r_regency_city`` does not have a unique key on ``regency_city_id`` in
+    the target database, so each row is explicitly checked before insert/update.
+    """
+    records = list(regencies)
+    connection.ping(reconnect=True)
+    with connection.cursor() as cursor:
+        cursor.execute(
+            """
+            INSERT INTO tb_m_province
+                (province_id, province_name, population, total_area_km2, latitude, longitude, timezone)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
+            ON DUPLICATE KEY UPDATE
+                province_name = VALUES(province_name),
+                population = VALUES(population),
+                total_area_km2 = VALUES(total_area_km2),
+                latitude = VALUES(latitude),
+                longitude = VALUES(longitude),
+                timezone = VALUES(timezone)
+            """,
+            (
+                int(province["id"]),
+                province["name"],
+                province["population"],
+                province["total_area_km2"],
+                province["latitude"],
+                province["longitude"],
+                province["timezone"],
+            ),
+        )
+        for region in records:
+            values = (
+                int(province["id"]),
+                region["name"],
+                region["population"],
+                region["total_area_km2"],
+                region["latitude"],
+                region["longitude"],
+                region["timezone"],
+                region["id"],
+            )
+            cursor.execute(
+                "SELECT 1 FROM tb_r_regency_city WHERE regency_city_id = %s LIMIT 1",
+                (region["id"],),
+            )
+            if cursor.fetchone() is not None:
+                cursor.execute(
+                    """
+                    UPDATE tb_r_regency_city
+                    SET province_id = %s,
+                        regency_city_name = %s,
+                        population = %s,
+                        total_area_km2 = %s,
+                        latitude = %s,
+                        longitude = %s,
+                        timezone = %s
+                    WHERE regency_city_id = %s
+                    """,
+                    values,
+                )
+            else:
+                cursor.execute(
+                    """
+                    INSERT INTO tb_r_regency_city
+                        (regency_city_id, province_id, regency_city_name, population,
+                         total_area_km2, latitude, longitude, timezone)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                    """,
+                    (region["id"], *values[:-1]),
+                )
+    return {"provinces": 1, "regencies": len(records)}
+
+
 def save_region_data(
     connection: Any, province: dict[str, Any], region: dict[str, Any], weather: dict[str, Any],
     hotspots: dict[str, Any], air_quality: dict[str, Any], forecast: dict[str, Any],

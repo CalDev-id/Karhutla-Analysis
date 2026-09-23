@@ -35,8 +35,9 @@ Catat status run ke tb_r_etl_run
 
 ## Otomatisasi Airflow
 
-- PostgreSQL: setiap hari pukul **09:00 WIB**.
-- MySQL: setiap hari pukul **10:30 WIB**.
+- DAG gabungan: setiap hari pukul **09:00 WIB**.
+- Cakupan: master wilayah ke MySQL `region` dan environmental data ke PostgreSQL
+  `environment_conditions`.
 - Cakupan: provinsi Kalimantan kode `61`, `62`, `63`, `64`, dan `65`.
 - Proses per provinsi berjalan berurutan.
 - Jika gagal, Airflow retry maksimal **2 kali** dengan jeda **15 menit**.
